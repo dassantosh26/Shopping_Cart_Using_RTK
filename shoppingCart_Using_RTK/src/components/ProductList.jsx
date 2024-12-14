@@ -3,11 +3,16 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import { fetchProducts } from "../features/ShopCart/productSlice";
+import { addToCart } from "../features/ShopCart/cartSlice";
 
 const ProductList = () => {
   // useSelector(state=>console.log(state.products)
   // )
   const { items: products, status } = useSelector((state) => state.products);
+  useSelector((state)=>console.log(state.cart)
+  )
+  useSelector((state)=>state.cart)
+  
 
   const dispatch = useDispatch();
 
@@ -40,7 +45,7 @@ const ProductList = () => {
                 : product.title}
             </h2>
             <p>Price: ${product.price}</p>
-            <button>Add to Cart</button>
+            <button onClick={()=>dispatch(addToCart(product))}>Add to Cart</button>
           </div>
         ))}
       </div>
