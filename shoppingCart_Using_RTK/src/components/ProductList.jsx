@@ -9,22 +9,15 @@ const ProductList = () => {
   // useSelector(state=>console.log(state.products)
   // )
   const { items: products, status } = useSelector((state) => state.products);
-  useSelector((state)=>console.log(state.cart)
-  )
+  
+  // useSelector((state)=>console.log(state.cart)
+  // )
   useSelector((state)=>state.cart)
   
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    /* const fetchProducts = async () => {
-      const res = await fetch("https://fakestoreapi.com/products");
-      const data = await res.json();
-      // console.log(data);  
-      setProducts(data)
-    }
-    fetchProducts() */
-
     if (status === "idle") {
       dispatch(fetchProducts());
     }
