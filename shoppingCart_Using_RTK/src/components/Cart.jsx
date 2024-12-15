@@ -1,15 +1,24 @@
 /** @format */
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../features/ShopCart/cartSlice";
 
 const Cart = () => {
-  useSelector((state) => console.log(state.cart));
+  // useSelector((state) => console.log(state.cart));
   const {
     items: cartItems,
     tempItems,
     totalPrice,
   } = useSelector((state) => state.cart);
-  const navigate=useNavigate()
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const handleRemoveItem = (id) => {
+    // alert(id)
+    dispatch(removeFromCart(id))
+}
+
   return (
     <div className="wrapper">
       <div className="cart-page-container">
@@ -24,7 +33,7 @@ const Cart = () => {
                 <div>
                   <input type="number" min={1} />
                   <button>Upadate</button>
-                  <button>Remove</button>
+                  <button onClick={()=>handleRemoveItem(item.id)}>Remove</button>
                 </div>
               </div>
             </div>
