@@ -32,8 +32,15 @@ const cartSlice = createSlice({
       state.tempItems = [...state.items];
       state.totalPrice = state.items.reduce((sum, item) => sum + item.price, 0);
     },
+    updateTempQuantity(state, action) {
+      // console.log(action.payload);
+      const tempItem=state.tempItems.find(item=>item.id === action.payload.id)
+      if (tempItem) {
+        tempItem.quantity=action.payload.qty;
+      }
+    }
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart,updateTempQuantity } = cartSlice.actions;
 export default cartSlice.reducer;

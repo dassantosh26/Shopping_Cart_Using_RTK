@@ -1,7 +1,7 @@
 /** @format */
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../features/ShopCart/cartSlice";
+import { removeFromCart, updateTempQuantity } from "../features/ShopCart/cartSlice";
 
 const Cart = () => {
   // useSelector((state) => console.log(state.cart));
@@ -18,7 +18,11 @@ const Cart = () => {
     // alert(id)
     dispatch(removeFromCart(id))
 }
-
+  const handleUpdateQunatity = (id, qty) => {
+    // console.log(id,qty);
+    dispatch(updateTempQuantity({id,qty}))
+ 
+}
   return (
     <div className="wrapper">
       <div className="cart-page-container">
@@ -31,7 +35,9 @@ const Cart = () => {
                 <h3> {item.title}</h3>
                 <p>Price: ${item.price.toFixed(2)}</p>
                 <div>
-                  <input type="number" min={1} />
+                  <input type="number" min={1} value={tempItems.find((tempItem) => tempItem.id===item.id)?.quantity||item.quantity}
+                    
+                    onChange={(e) => handleUpdateQunatity(item.id, parseInt(e.target.value))} />
                   <button>Upadate</button>
                   <button onClick={()=>handleRemoveItem(item.id)}>Remove</button>
                 </div>
