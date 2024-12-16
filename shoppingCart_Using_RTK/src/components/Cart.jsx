@@ -32,7 +32,7 @@ const Cart = () => {
   return (
     <div className="wrapper">
       <div className="cart-page-container">
-        <div className="cart-container">
+       {cartItems.length>0? (<div className="cart-container">
           <h2>Your Cart</h2>
           {cartItems.map((item) => (
             <div className="cart-item" key={item.id}>
@@ -54,7 +54,10 @@ const Cart = () => {
             <p>Total: ${ totalPrice.toFixed(2)}</p>
           </div>
           <button className="back-button" onClick={()=>navigate("/")}>Back to Shopping</button>
-        </div>
+        </div>) : (<div className="cart-empty">
+            <h3>Your cart is empty </h3>
+            <button onClick={()=>navigate("/")}>Back to Home</button>
+        </div>)}
       </div>
     </div>
   );
